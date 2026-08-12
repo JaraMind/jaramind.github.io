@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JaraOS — Магазин ключей</title>
+<style>
+
+:root {
+    --accent: #7864ff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: white;
+    background:
+        radial-gradient(circle at 70% 20%, rgba(120, 80, 255, .30), transparent 40%),
+        radial-gradient(circle at 15% 80%, rgba(20, 130, 255, .20), transparent 40%),
+        linear-gradient(135deg, #05050b, #09071a, #03040a);
+    background-attachment: fixed;
+}
+
+a {
+    color: inherit;
+}
+
+/* ---------- HEADER ---------- */
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 40px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-logo {
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--accent), #1a9cff);
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.brand-name {
+    font-weight: 600;
+    letter-spacing: .5px;
+}
+
+.back-link {
+    padding: 9px 16px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, .15);
+    text-decoration: none;
+    font-size: 13px;
+    color: #ddd;
+}
+
+.back-link:hover {
+    background: rgba(255, 255, 255, .08);
+}
+
+/* ---------- HERO ---------- */
+
+.hero {
+    text-align: center;
+    padding: 40px 20px 10px;
+}
+
+.hero h1 {
+    margin: 0 0 10px;
+    font-size: 34px;
+}
+
+.hero p {
+    margin: 0 auto;
+    max-width: 480px;
+    color: #aaa;
+    line-height: 1.5;
+}
+
+.early-access-badge {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: rgba(120, 100, 255, .15);
+    border: 1px solid rgba(120, 100, 255, .35);
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: #cfc7ff;
+}
+
+/* ---------- PRICING CARD ---------- */
+
+.plans {
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px 20px;
+}
+
+.plan-card {
+    width: 340px;
+    padding: 30px;
+    background: rgba(14, 14, 24, .8);
+    border: 1px solid rgba(255, 255, 255, .10);
+    border-radius: 16px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 25px 80px rgba(0, 0, 0, .5);
+}
+
+.plan-name {
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: #999;
+    text-transform: uppercase;
+}
+
+.plan-price {
+    margin: 8px 0 4px;
+    font-size: 40px;
+    font-weight: 600;
+}
+
+.plan-price small {
+    font-size: 14px;
+    font-weight: 400;
+    color: #999;
+}
+
+.plan-note {
+    margin: 0 0 20px;
+    font-size: 13px;
+    color: #888;
+}
+
+.plan-features {
+    list-style: none;
+    margin: 0 0 24px;
+    padding: 0;
+    font-size: 14px;
+    color: #ddd;
+}
+
+.plan-features li {
+    display: flex;
+    gap: 10px;
+    padding: 7px 0;
+}
+
+.plan-features li::before {
+    content: "✓";
+    color: #56f5a8;
+}
+
+.get-key-btn {
+    width: 100%;
+    padding: 13px;
+    border: 0;
+    border-radius: 10px;
+    background: var(--accent);
+    color: white;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.get-key-btn:hover {
+    filter: brightness(1.1);
+}
+
+/* ---------- RESULT ---------- */
+
+.result-panel {
+    max-width: 520px;
+    margin: 24px auto 0;
+    padding: 22px;
+    background: rgba(86, 245, 168, .08);
+    border: 1px solid rgba(86, 245, 168, .30);
+    border-radius: 14px;
+    display: none;
+}
+
+.result-panel.open {
+    display: block;
+}
+
+.result-panel h3 {
+    margin: 0 0 6px;
+    font-size: 14px;
+    color: #9dffc4;
+}
+
+.key-display {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.key-display code {
+    flex: 1;
+    padding: 12px 14px;
+    background: rgba(0, 0, 0, .35);
+    border-radius: 8px;
+    font-size: 16px;
+    letter-spacing: 1px;
+    word-break: break-all;
+}
+
+.copy-btn {
+    padding: 12px 14px;
+    border: 0;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, .10);
+    color: white;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.copy-btn:hover {
+    background: rgba(255, 255, 255, .18);
+}
+
+.how-to {
+    margin: 10px 0 0;
+    font-size: 13px;
+    color: #bbb;
+    line-height: 1.5;
+}
+
+/* ---------- HISTORY ---------- */
+
+.history {
+    max-width: 520px;
+    margin: 30px auto 60px;
+    padding: 0 20px;
+}
+
+.history h4 {
+    font-size: 13px;
+    color: #888;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.history-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px 14px;
+    margin-bottom: 6px;
+    background: rgba(255, 255, 255, .04);
+    border-radius: 8px;
+    font-size: 13px;
+    color: #ccc;
+}
+
+.history-item code {
+    color: white;
+}
+
+.history-empty {
+    color: #666;
+    font-size: 13px;
+}
+
+</style>
+</head>
+<body>
+
+<header>
+    <div class="brand">
+        <div class="brand-logo">J</div>
+        <div class="brand-name">JaraOS Store</div>
+    </div>
+    <a class="back-link" href="index.html">← Открыть JaraOS</a>
+</header>
+
+<section class="hero">
+    <h1>Лицензии JaraOS</h1>
+    <p>Активационные ключи для JaraOS. Ключ вводится в приложении в разделе «Параметры → Лицензия».</p>
+    <div class="early-access-badge">РАННИЙ ДОСТУП · ВСЕ КЛЮЧИ БЕСПЛАТНО</div>
+</section>
+
+<section class="plans">
+    <div class="plan-card">
+        <div class="plan-name">Standard</div>
+        <div class="plan-price">0 ₽ <small>/ пока идёт ранний доступ</small></div>
+        <p class="plan-note">Позже здесь появится платный тариф — сейчас ключи выдаются бесплатно всем.</p>
+        <ul class="plan-features">
+            <li>Полная активация JaraOS</li>
+            <li>Снятие пометки DEMO-режима</li>
+            <li>Один ключ на устройство</li>
+        </ul>
+        <button class="get-key-btn" id="getKeyBtn">Получить ключ бесплатно</button>
+    </div>
+</section>
+
+<div class="result-panel" id="resultPanel">
+    <h3>Ваш ключ готов</h3>
+    <div class="key-display">
+        <code id="keyOutput"></code>
+        <button class="copy-btn" id="copyBtn">Копировать</button>
+    </div>
+    <p class="how-to">
+        Как активировать: откройте JaraOS → «Параметры» → «Лицензия» → вставьте ключ в поле → «Активировать».
+    </p>
+</div>
+
+<div class="history">
+    <h4>История выданных ключей (только в этом браузере)</h4>
+    <div id="historyList"></div>
+</div>
+
+<script>
+
+// Тот же алгоритм, что в keygen.py и в script.js JaraOS (validateJaraosKey),
+// так что любой ключ, выданный здесь, реально принимается в приложении.
+const CHARSET = "23456789ABCDEFGHJKLMNPQRSTUVWXYZ";
+const PREFIX = "JARA";
+const BLOCKS = 4;
+const BLOCK_LENGTH = 4;
+const CHECKSUM_LENGTH = 4;
+
+const STORE_HISTORY_KEY = "JARAOS_STORE_KEYS";
+
+function randomChar(charset) {
+    return charset[Math.floor(Math.random() * charset.length)];
+}
+
+function checksumBlock(payload, charset, length) {
+    const charsetLength = charset.length;
+    const modulus = Math.pow(charsetLength, length);
+    let checksum = 0;
+    for (let i = 0; i < payload.length; i++) {
+        checksum = (checksum + payload.charCodeAt(i) * (i + 1)) % modulus;
+    }
+    const result = [];
+    for (let i = 0; i < length; i++) {
+        result.push(charset[checksum % charsetLength]);
+        checksum = Math.floor(checksum / charsetLength);
+    }
+    return result.reverse().join("");
+}
+
+function generateKey() {
+    const randomBlocks = [];
+    for (let b = 0; b < BLOCKS; b++) {
+        let block = "";
+        for (let c = 0; c < BLOCK_LENGTH; c++) block += randomChar(CHARSET);
+        randomBlocks.push(block);
+    }
+    const payload = randomBlocks.join("");
+    const checksum = checksumBlock(payload, CHARSET, CHECKSUM_LENGTH);
+    return [PREFIX, ...randomBlocks, checksum].join("-");
+}
+
+function loadHistory() {
+    try {
+        return JSON.parse(localStorage.getItem(STORE_HISTORY_KEY)) || [];
+    } catch (e) {
+        return [];
+    }
+}
+
+function saveHistory(history) {
+    localStorage.setItem(STORE_HISTORY_KEY, JSON.stringify(history));
+}
+
+function renderHistory() {
+    const history = loadHistory();
+    const container = document.getElementById("historyList");
+
+    if (history.length === 0) {
+        container.innerHTML = '<div class="history-empty">Ключей пока не выдавалось.</div>';
+        return;
+    }
+
+    container.innerHTML = history
+        .slice()
+        .reverse()
+        .map(entry => `
+            <div class="history-item">
+                <code>${entry.key}</code>
+                <span>${entry.date}</span>
+            </div>
+        `)
+        .join("");
+}
+
+document.getElementById("getKeyBtn").addEventListener("click", () => {
+    const key = generateKey();
+
+    const history = loadHistory();
+    history.push({
+        key,
+        date: new Date().toLocaleString("ru-RU")
+    });
+    saveHistory(history);
+
+    document.getElementById("keyOutput").textContent = key;
+    document.getElementById("resultPanel").classList.add("open");
+    renderHistory();
+});
+
+document.getElementById("copyBtn").addEventListener("click", () => {
+    const key = document.getElementById("keyOutput").textContent;
+    navigator.clipboard.writeText(key).then(() => {
+        const btn = document.getElementById("copyBtn");
+        const original = btn.textContent;
+        btn.textContent = "Скопировано!";
+        setTimeout(() => (btn.textContent = original), 1500);
+    });
+});
+
+renderHistory();
+
+</script>
+
+</body>
+</html>

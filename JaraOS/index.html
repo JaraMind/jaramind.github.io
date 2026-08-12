@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JaraOS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ================= LOCK SCREEN ================= -->
+
+<div id="lockScreen" class="lock-screen">
+
+    <div class="lock-time-large">
+
+        <div id="lockClock" class="lock-clock-large">
+            00:00
+        </div>
+
+        <div id="lockDate" class="lock-date-large">
+        </div>
+
+    </div>
+
+
+    <div class="lock-card">
+
+        <div class="lock-logo small">J</div>
+
+        <h1 id="lockTitle">
+            Добро пожаловать
+        </h1>
+
+        <p id="lockAccount">
+            JaraID
+        </p>
+
+        <input
+            id="lockPassword"
+            type="password"
+            placeholder="Пароль JaraOS"
+        >
+
+        <button id="unlockBtn" class="primary">
+            Разблокировать
+        </button>
+
+        <button id="switchAccountBtn" class="ghost">
+            Сменить JaraID
+        </button>
+
+        <div id="lockError" class="error"></div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= DESKTOP ================= -->
+
+<div id="desktop">
+
+    <div class="wallpaper"></div>
+    <div class="grid"></div>
+
+
+    <!-- SYSTEM INFO -->
+
+    <div class="system-info">
+
+        <span>
+            <i class="status-dot"></i>
+            JARAOS SYSTEM
+        </span>
+
+        <span>
+            SECURE
+        </span>
+
+    </div>
+
+
+    <!-- DESKTOP ICONS -->
+
+    <div id="desktopIcons" class="desktop-icons"></div>
+
+
+    <!-- ================= CONTEXT MENU ================= -->
+
+    <div id="contextMenu" class="context-menu">
+
+        <button data-action="new-folder">
+            📁 Новая папка
+        </button>
+
+        <button data-action="refresh">
+            🔄 Обновить
+        </button>
+
+        <hr>
+
+        <button data-action="settings">
+            ⚙ Параметры
+        </button>
+
+        <button data-action="personalize">
+            🎨 Персонализация
+        </button>
+
+    </div>
+
+
+    <!-- ================= FILE EXPLORER ================= -->
+
+    <div class="window" id="files">
+
+        <div class="window-header">
+
+            <span>
+                📁 Проводник
+            </span>
+
+            <div class="window-buttons">
+
+                <button data-window="files" data-action="min">
+                    −
+                </button>
+
+                <button data-window="files" data-action="max">
+                    □
+                </button>
+
+                <button data-window="files" data-action="close">
+                    ×
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="window-content explorer">
+
+            <div class="explorer-toolbar">
+
+                <button id="backFolder">
+                    ←
+                </button>
+
+                <div id="currentPath">
+                    Рабочий стол
+                </div>
+
+                <button id="newFolderExplorer">
+                    ＋ Папка
+                </button>
+
+            </div>
+
+
+            <div id="fileGrid" class="file-grid"></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= TERMINAL ================= -->
+
+    <div class="window terminal-window" id="terminal">
+
+        <div class="window-header">
+
+            <span>
+                ⌘ JaraOS Terminal
+            </span>
+
+            <div class="window-buttons">
+
+                <button data-window="terminal" data-action="min">
+                    −
+                </button>
+
+                <button data-window="terminal" data-action="max">
+                    □
+                </button>
+
+                <button data-window="terminal" data-action="close">
+                    ×
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="terminal-content" id="terminalOutput">
+
+            <div>
+                JaraOS Terminal v2.0
+            </div>
+
+            <div>
+                Kernel initialized...
+            </div>
+
+            <div>
+                Security layer: ACTIVE
+            </div>
+
+            <div>
+                JaraID: CONNECTED
+            </div>
+
+            <br>
+
+            <div>
+                Введите <b>help</b> для списка команд.
+            </div>
+
+            <div class="terminal-line">
+
+                <span>
+                    jara@JaraOS:~$
+                </span>
+
+                <input
+                    id="terminalInput"
+                    autocomplete="off"
+                >
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= NOTES ================= -->
+
+    <div class="window" id="notes">
+
+        <div class="window-header">
+
+            <span>
+                📝 Заметки
+            </span>
+
+            <div class="window-buttons">
+
+                <button data-window="notes" data-action="min">
+                    −
+                </button>
+
+                <button data-window="notes" data-action="max">
+                    □
+                </button>
+
+                <button data-window="notes" data-action="close">
+                    ×
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="window-content notes-content">
+
+            <textarea
+                id="notesArea"
+                placeholder="Введите заметку..."
+            ></textarea>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= SETTINGS ================= -->
+
+    <div class="window" id="settings">
+
+        <div class="window-header">
+
+            <span>
+                ⚙ Параметры
+            </span>
+
+            <div class="window-buttons">
+
+                <button data-window="settings" data-action="min">
+                    −
+                </button>
+
+                <button data-window="settings" data-action="max">
+                    □
+                </button>
+
+                <button data-window="settings" data-action="close">
+                    ×
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="settings-layout">
+
+
+            <!-- SETTINGS SIDEBAR -->
+
+            <aside class="settings-sidebar">
+
+                <button
+                    class="setting-tab active"
+                    data-tab="personalization"
+                >
+                    <span class="setting-tab-icon">🎨</span>
+                    <span class="setting-tab-text">
+                        <strong>Персонализация</strong>
+                        <small>Фон, цвета, тема</small>
+                    </span>
+                </button>
+
+                <button
+                    class="setting-tab"
+                    data-tab="system"
+                >
+                    <span class="setting-tab-icon">🖥</span>
+                    <span class="setting-tab-text">
+                        <strong>Система</strong>
+                        <small>О системе, блокировка</small>
+                    </span>
+                </button>
+
+                <button
+                    class="setting-tab"
+                    data-tab="updates"
+                >
+                    <span class="setting-tab-icon">🔄</span>
+                    <span class="setting-tab-text">
+                        <strong>Обновления</strong>
+                        <small>Центр обновления JaraOS</small>
+                    </span>
+                </button>
+
+                <button
+                    class="setting-tab"
+                    data-tab="jaraid"
+                >
+                    <span class="setting-tab-icon">👤</span>
+                    <span class="setting-tab-text">
+                        <strong>JaraID</strong>
+                        <small>Учётные записи</small>
+                    </span>
+                </button>
+
+                <button
+                    class="setting-tab"
+                    data-tab="license"
+                >
+                    <span class="setting-tab-icon">🔐</span>
+                    <span class="setting-tab-text">
+                        <strong>Лицензия</strong>
+                        <small>Активация JaraOS</small>
+                    </span>
+                </button>
+
+            </aside>
+
+
+            <!-- SETTINGS CONTENT -->
+
+            <main class="settings-pages">
+
+
+                <!-- PERSONALIZATION -->
+
+                <section
+                    class="setting-page active"
+                    id="tab-personalization"
+                >
+
+                    <h2>
+                        Персонализация
+                    </h2>
+
+                    <p>
+                        Настрой внешний вид JaraOS.
+                    </p>
+
+
+                    <label>
+
+                        Акцентный цвет
+
+                        <input
+                            id="accentPicker"
+                            type="color"
+                        >
+
+                    </label>
+
+
+                    <label>
+
+                        Обои
+
+                        <select id="wallpaperSelect">
+
+                            <option value="nebula">
+                                Nebula
+                            </option>
+
+                            <option value="blue">
+                                Deep Blue
+                            </option>
+
+                            <option value="purple">
+                                Purple Void
+                            </option>
+
+                        </select>
+
+                    </label>
+
+                </section>
+
+
+                <!-- SYSTEM -->
+
+                <section
+                    class="setting-page"
+                    id="tab-system"
+                >
+
+                    <h2>
+                        Система
+                    </h2>
+
+                    <div class="info-card">
+
+                        <b>
+                            JaraOS 2.0
+                        </b>
+
+                        <span>
+                            JaraCore Web Kernel
+                        </span>
+
+                        <span id="systemUser"></span>
+
+                        <span id="systemLicense"></span>
+
+                    </div>
+
+
+                    <button
+                        id="lockNow"
+                        class="secondary"
+                    >
+                        🔒 Заблокировать ПК
+                    </button>
+
+                </section>
+
+
+                <!-- UPDATES -->
+
+                <section
+                    class="setting-page"
+                    id="tab-updates"
+                >
+
+                    <h2>
+                        Обновления
+                    </h2>
+
+                    <div class="update-card">
+
+                        <div>
+
+                            <b>
+                                JaraOS Update Center
+                            </b>
+
+                            <span id="updateStatus">
+                                Система готова к проверке
+                            </span>
+
+                        </div>
+
+                        <button
+                            id="checkUpdates"
+                            class="primary"
+                        >
+                            Проверить
+                        </button>
+
+                    </div>
+
+                </section>
+
+
+                <!-- JARA ID -->
+
+                <section
+                    class="setting-page"
+                    id="tab-jaraid"
+                >
+
+                    <h2>
+                        JaraID
+                    </h2>
+
+                    <div id="jaraIdPanel"></div>
+
+                </section>
+
+
+                <!-- LICENSE -->
+
+                <section
+                    class="setting-page"
+                    id="tab-license"
+                >
+
+                    <h2>
+                        Активация JaraOS
+                    </h2>
+
+                    <p>
+                        Введи лицензионный ключ JaraOS.
+                    </p>
+
+
+                    <div class="license-box">
+
+                        <input
+                            id="licenseInput"
+                            placeholder="JARA-2026-DEMO-ACCESS"
+                        >
+
+                        <button
+                            id="activateLicense"
+                            class="primary"
+                        >
+                            Активировать
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        id="licenseStatus"
+                        class="license-status"
+                    ></div>
+
+
+                    <small>
+                        Тестовый ключ:
+                        JARA-2026-DEMO-ACCESS
+                    </small>
+
+                </section>
+
+            </main>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= START MENU (Windows 11 style) ================= -->
+
+    <div
+        id="startMenu"
+        class="start-menu"
+    >
+
+        <div class="search">
+
+            🔍
+
+            <input
+                id="appSearch"
+                placeholder="Поиск приложений и файлов"
+            >
+
+        </div>
+
+
+        <div class="start-section-label">
+            Закреплено
+        </div>
+
+
+        <div class="apps">
+
+            <button data-app="files">
+                <span class="app-tile-icon">📁</span>
+                <span>
+                    Проводник
+                </span>
+            </button>
+
+            <button data-app="terminal">
+                <span class="app-tile-icon">⌘</span>
+                <span>
+                    Terminal
+                </span>
+            </button>
+
+            <button data-app="notes">
+                <span class="app-tile-icon">📝</span>
+                <span>
+                    Заметки
+                </span>
+            </button>
+
+            <button data-app="settings">
+                <span class="app-tile-icon">⚙</span>
+                <span>
+                    Параметры
+                </span>
+            </button>
+
+        </div>
+
+
+        <div class="start-footer">
+
+            <div class="start-account">
+
+                <div class="jara-logo small">
+                    J
+                </div>
+
+                <span id="startUser">
+                    USER SYSTEM
+                </span>
+
+            </div>
+
+            <button
+                id="lockFromMenu"
+                class="power-btn"
+                title="Заблокировать"
+            >
+                ⏻
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= TASKBAR (Windows 11 style) ================= -->
+
+    <div class="taskbar">
+
+        <div class="taskbar-center">
+
+            <button
+                id="startButton"
+                class="start-button"
+                title="Пуск"
+            >
+                <span class="win-logo">
+                    <i></i><i></i><i></i><i></i>
+                </span>
+            </button>
+
+            <div
+                id="taskApps"
+                class="task-apps"
+            ></div>
+
+        </div>
+
+
+        <div class="taskbar-right">
+
+            <div class="tray-icons">
+
+                <span title="Сеть">
+                    <i class="network-dot"></i>
+                    📶
+                </span>
+
+                <span title="Звук">
+                    🔊
+                </span>
+
+                <span title="Батарея">
+                    🔋
+                </span>
+
+            </div>
+
+            <div class="tray-clock">
+
+                <span id="clock">
+                    00:00
+                </span>
+
+                <span id="trayDate" class="tray-date"></span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= ACCOUNT MODAL ================= -->
+
+<div
+    id="accountModal"
+    class="modal hidden"
+>
+
+    <div class="modal-card">
+
+        <button
+            id="closeAccountModal"
+            class="modal-close"
+        >
+            ×
+        </button>
+
+
+        <div class="lock-logo small">
+            J
+        </div>
+
+
+        <h2>
+            JaraID
+        </h2>
+
+        <p>
+            Аккаунты JaraOS
+        </p>
+
+
+        <input
+            id="accountName"
+            placeholder="Имя пользователя"
+        >
+
+
+        <input
+            id="accountPass"
+            type="password"
+            placeholder="Пароль"
+        >
+
+
+        <button
+            id="createAccount"
+            class="primary"
+        >
+            Создать JaraID
+        </button>
+
+
+        <div id="accountList"></div>
+
+    </div>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
