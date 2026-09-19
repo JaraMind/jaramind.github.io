@@ -1614,3 +1614,300 @@ select {
 
     cursor: pointer;
 }
+
+
+/* ================= JARAOS 3.0 CORE UI ================= */
+
+:root {
+    --surface: rgba(12, 12, 22, .90);
+    --surface-strong: rgba(14, 14, 24, .96);
+    --text: #ffffff;
+    --muted: #aaaabd;
+}
+
+:root[data-theme="light"] {
+    --surface: rgba(242, 244, 250, .94);
+    --surface-strong: rgba(248, 249, 253, .98);
+    --text: #171824;
+    --muted: #5f6272;
+}
+
+:root[data-theme="light"] .window,
+:root[data-theme="light"] .start-menu,
+:root[data-theme="light"] .taskbar,
+:root[data-theme="light"] .context-menu,
+:root[data-theme="light"] .notification-toast {
+    color: var(--text);
+    background: var(--surface);
+    border-color: rgba(0, 0, 0, .14);
+}
+
+:root[data-theme="light"] .window button,
+:root[data-theme="light"] .start-menu button,
+:root[data-theme="light"] .taskbar button,
+:root[data-theme="light"] .context-menu button,
+:root[data-theme="light"] .notes-content textarea,
+:root[data-theme="light"] .setting-tab-text strong,
+:root[data-theme="light"] .tray-clock #clock,
+:root[data-theme="light"] .search input {
+    color: var(--text);
+}
+
+.boot-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 9000;
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    gap: 12px;
+    background: #03040a;
+    transition: opacity .2s ease, visibility .2s ease;
+}
+
+.boot-screen.complete {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.boot-screen.failed #bootStatus {
+    color: #ff6b7a;
+}
+
+.boot-logo {
+    width: 72px;
+    height: 72px;
+    display: grid;
+    place-items: center;
+    border-radius: 20px;
+    background: linear-gradient(135deg, var(--accent), #1a9cff);
+    font-size: 34px;
+    font-weight: 700;
+    box-shadow: 0 0 45px rgba(100, 80, 255, .45);
+}
+
+.boot-screen span {
+    color: #8d8fa3;
+    font-size: 13px;
+}
+
+.desktop-icons {
+    flex-wrap: wrap;
+    max-height: calc(100vh - 140px);
+}
+
+.desktop-icon.selected {
+    background: rgba(120, 100, 255, .2);
+    outline: 1px solid var(--accent);
+}
+
+.window {
+    background: var(--surface);
+}
+
+.window.focused {
+    border-color: var(--accent);
+    box-shadow: 0 24px 70px rgba(0, 0, 0, .58);
+}
+
+.window-header {
+    touch-action: none;
+}
+
+.explorer-toolbar {
+    flex-wrap: wrap;
+}
+
+#currentPath {
+    min-width: 180px;
+}
+
+.file.selected {
+    background: rgba(120, 100, 255, .22);
+    outline: 1px solid var(--accent);
+}
+
+.explorer-toolbar button:disabled,
+.context-menu button:disabled,
+.account-item button:disabled {
+    opacity: .4;
+    cursor: default;
+}
+
+.context-menu button:disabled:hover {
+    background: transparent;
+}
+
+.terminal-command {
+    color: #6aff9a;
+}
+
+.terminal-error {
+    color: #ff7d89;
+}
+
+.task-app.active {
+    background: rgba(255, 255, 255, .09);
+}
+
+.task-app.active::after {
+    width: 16px;
+}
+
+.task-app.minimized::after {
+    background: #8a8a99;
+}
+
+.notification-center {
+    position: fixed;
+    right: 18px;
+    bottom: 64px;
+    z-index: 7000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: min(340px, calc(100vw - 36px));
+    pointer-events: none;
+}
+
+.notification-toast {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 14px;
+    border: 1px solid rgba(255, 255, 255, .12);
+    border-radius: 12px;
+    background: var(--surface-strong);
+    box-shadow: 0 16px 50px rgba(0, 0, 0, .45);
+    backdrop-filter: blur(24px);
+    opacity: 0;
+    transform: translateX(18px);
+    transition: .18s ease;
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+.notification-toast.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.notification-icon {
+    width: 30px;
+    height: 30px;
+    flex: 0 0 30px;
+    display: grid;
+    place-items: center;
+    border-radius: 8px;
+    background: var(--accent);
+    color: white;
+}
+
+.notification-toast strong,
+.notification-toast span {
+    display: block;
+}
+
+.notification-toast span {
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+@media (max-width: 760px) {
+    .window {
+        width: calc(100vw - 20px);
+        height: calc(100vh - 76px);
+    }
+
+    .settings-sidebar {
+        width: 76px;
+    }
+
+    .setting-tab-text {
+        display: none;
+    }
+
+    .file-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .tray-icons,
+    .system-info {
+        display: none;
+    }
+
+    .start-menu {
+        width: calc(100vw - 24px);
+    }
+}
+
+.system-dialog {
+    position: fixed;
+    inset: 0;
+    z-index: 8000;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, .62);
+}
+
+.system-dialog.hidden {
+    display: none;
+}
+
+.system-dialog-card {
+    width: min(420px, 100%);
+    padding: 24px;
+    border: 1px solid rgba(255, 255, 255, .13);
+    border-radius: 14px;
+    background: var(--surface-strong);
+    color: var(--text);
+    box-shadow: 0 30px 100px rgba(0, 0, 0, .65);
+}
+
+.system-dialog-card h2 {
+    margin: 0 0 8px;
+    font-size: 20px;
+}
+
+.system-dialog-card p {
+    margin: 0 0 16px;
+    color: var(--muted);
+}
+
+.system-dialog-card input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, .14);
+    border-radius: 9px;
+    outline: none;
+    background: rgba(255, 255, 255, .07);
+    color: var(--text);
+}
+
+.system-dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.system-dialog-actions button {
+    padding: 9px 15px;
+    border: 0;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, .1);
+    color: var(--text);
+    cursor: pointer;
+}
+
+.system-dialog-actions .primary {
+    background: var(--accent);
+    color: white;
+}
+
+.system-dialog-actions .danger {
+    background: #d94255;
+}

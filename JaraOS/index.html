@@ -9,6 +9,14 @@
 
 <body>
 
+<!-- ================= SYSTEM BOOT ================= -->
+
+<div id="bootScreen" class="boot-screen" aria-live="polite">
+    <div class="boot-logo">J</div>
+    <strong>JaraOS 3.0</strong>
+    <span id="bootStatus">Запуск JaraCore…</span>
+</div>
+
 <!-- ================= LOCK SCREEN ================= -->
 
 <div id="lockScreen" class="lock-screen">
@@ -89,27 +97,7 @@
 
     <!-- ================= CONTEXT MENU ================= -->
 
-    <div id="contextMenu" class="context-menu">
-
-        <button data-action="new-folder">
-            📁 Новая папка
-        </button>
-
-        <button data-action="refresh">
-            🔄 Обновить
-        </button>
-
-        <hr>
-
-        <button data-action="settings">
-            ⚙ Параметры
-        </button>
-
-        <button data-action="personalize">
-            🎨 Персонализация
-        </button>
-
-    </div>
+    <div id="contextMenu" class="context-menu" role="menu"></div>
 
 
     <!-- ================= FILE EXPLORER ================= -->
@@ -157,6 +145,18 @@
                     ＋ Папка
                 </button>
 
+                <button id="newTextFileExplorer">
+                    ＋ Файл
+                </button>
+
+                <button id="renameExplorerItem" disabled>
+                    Переименовать
+                </button>
+
+                <button id="deleteExplorerItem" disabled>
+                    Удалить
+                </button>
+
             </div>
 
 
@@ -199,7 +199,7 @@
         <div class="terminal-content" id="terminalOutput">
 
             <div>
-                JaraOS Terminal v2.0
+                JaraOS Terminal v3.0
             </div>
 
             <div>
@@ -222,8 +222,8 @@
 
             <div class="terminal-line">
 
-                <span>
-                    jara@JaraOS:~$
+                <span id="terminalPrompt">
+                    jara@JaraOS:/Desktop$
                 </span>
 
                 <input
@@ -405,6 +405,18 @@
 
                     </label>
 
+                    <label>
+
+                        Тема
+
+                        <select id="themeSelect">
+                            <option value="dark">Тёмная</option>
+                            <option value="light">Светлая</option>
+                            <option value="system">Системная</option>
+                        </select>
+
+                    </label>
+
 
                     <label>
 
@@ -445,7 +457,7 @@
                     <div class="info-card">
 
                         <b>
-                            JaraOS 2.0
+                            JaraOS 3.0
                         </b>
 
                         <span>
@@ -599,37 +611,7 @@
         </div>
 
 
-        <div class="apps">
-
-            <button data-app="files">
-                <span class="app-tile-icon">📁</span>
-                <span>
-                    Проводник
-                </span>
-            </button>
-
-            <button data-app="terminal">
-                <span class="app-tile-icon">⌘</span>
-                <span>
-                    Terminal
-                </span>
-            </button>
-
-            <button data-app="notes">
-                <span class="app-tile-icon">📝</span>
-                <span>
-                    Заметки
-                </span>
-            </button>
-
-            <button data-app="settings">
-                <span class="app-tile-icon">⚙</span>
-                <span>
-                    Параметры
-                </span>
-            </button>
-
-        </div>
+        <div class="apps" id="startApps"></div>
 
 
         <div class="start-footer">
@@ -778,7 +760,12 @@
 </div>
 
 
-<script src="script.js"></script>
+<!-- ================= NOTIFICATIONS ================= -->
+
+<div id="notificationCenter" class="notification-center" aria-live="polite"></div>
+
+
+<script src="dist/jaraos.js"></script>
 
 </body>
 </html>
